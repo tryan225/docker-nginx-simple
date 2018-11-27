@@ -4,7 +4,6 @@ services:
     image: tryan225/kramericaindustries:1.0
     container_name: nginx-simple
     restart: always
-    network_mode: "bridge"
     ports:
       - 8080:80
     labels:
@@ -12,6 +11,8 @@ services:
       - traefik.frontend.rule=Host:kramericaindustries.net
       - traefik.port=80
       - traefik.docker.network=web
+    networks:
+      - web
 
 networks:
   web:
