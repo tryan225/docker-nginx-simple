@@ -1,11 +1,18 @@
 version: "3"
 services:
   nginx:
-    image: nginx-simple:latest
+    image: tryan225/kramericaindustries:1.0
     container_name: nginx-simple
     restart: always
     network_mode: "bridge"
-    volumes:
-      - ./wwwroot/:/var/www/
-    build:
-      context: .
+    ports:
+      - 8080:80
+    labels:
+      - traefik.enable=true
+      - traefik.frontend.rule=Host:kramericaindustries.net
+      - traefik.port=80
+      - traefik.docker.network=web
+
+networks:
+  web:
+    external: true
